@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <head>
+        <style>
+            .stilig1 {
+                background-color: blueviolet;
+                padding: 15px;
+                color: whitesmoke;
+                text-shadow: 2px mistyrose;
+            }
+            .stilig2 {
+                background-color: lightgreen;
+                border: blueviolet solid;
+                padding: 20px;
+                opacity: 60%;
+            }
+            .stilig3 {
+                background-color: lightsteelblue;
+                border-bottom: dashed yellow;
+                color: red;
+                font-weight: bolder;
+                padding: 25px;
+            }
+            div.selected::before {
+                content: "🡆";
+            }
+
+            div.selected::after {
+                content: "🡄";
+            }
+            div.notselected::before {
+                content: "";
+            }
+            div.notselected::after {
+                content: "";
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+        <h2>9 - Endre andre ting enn innerHTML: value, style</h2>
+        <br>
+        <p><b>Oppgave:</b>
+            Du skal lage en liten applikasjon, hvor du har fem forskjellige effekter (som hver har sin css-klasse). Så du fem forskjellige diver, som du skal kunne trykke på. Den du trykker på blir valgt, og når du velger en effekt, skal den slås på eller av for den valgte div-en. For å få til dette er det mange skritt, og disse er listet opp under:
+        <br>
+
+        </br>
+            Del 1) Lag fem forskjellige navngitte css-stiler som regulerer ulike ting, for eksempel, border, padding, margin , background-color og color. Lag en div, og gjør det sånn at når du velger en checkbox, så skrus den tilhørenden effekten på på div-en. For å få til dette trenger dere funksjonen toggle, som kan brukes slik:
+        <br>
+
+        </br>
+            Del 2) Når man fjerner en check, skal også effekten fjernes på div-en.
+        <br>
+
+        </br>
+            Del 3) Legg til en div til. Det skal være mulig å velge en av div-ene og hvilken av dem som er valgt skal vises på en måte som du velger helt selv. Men om du ikke finner på noe, kan du legge til en pil før og etter ved hjelp av denne css-en (som antar at du bruker "selected" som css-klasse for den som er valgt):
+        <br>
+
+        </br>       
+        Del 4) Når man endrer på checkbox-ene, så skal endringen kun gjelde den valgte div-en
+        <br>Del 5) Når man velger en ny div, skal checkbox-ene oppdateres ut fra hvilke effekter den valgte div-en faktisk har skrudd på og av.   
+        </p>
+
+
+        <select id="valg" onchange="Sstyle(this)">
+        <option value="alt2">Første linje</option> 
+        <option selected value="alt1">Ingen</option>   
+        <option value="alt3">Andre linje</option>    
+        </select>
+        <input id="ch1" type="checkbox" onchange="Sstyle(this)" />
+        <input id="ch2" type="checkbox" onchange="Sstyle(this)" />
+        <input id="ch3" type="checkbox" onchange="Sstyle(this)" />
+        <div id="resultat">1. Første linje</div>
+        <div id="resultat2">2. Andre linje</div> 
+
+        <script>
+
+            //Disse variablene er kun for å korte ned "document.getElementById" 
+            var resultat = document.getElementById('resultat');
+            var resultat2 = document.getElementById('resultat2');
+            var ch1 = document.getElementById('ch1');
+            var ch2 = document.getElementById('ch2');
+            var ch3 = document.getElementById('ch3');
+
+
+            function Sstyle(){
+                var valgt = document.getElementById('valg');
+                var value = valgt.options[valgt.selectedIndex].value; 
+                console.log(value);
+                if(value === 'alt1'){
+                resultat.classList.remove("selected")
+                resultat2.classList.remove("selected")
+                }
+                if(value === 'alt2'){
+                    var isChecked = ch1.checked;
+                    resultat.classList.toggle('stilig1', isChecked);
+                    var isChecked = ch2.checked;
+                    resultat.classList.toggle('stilig2', isChecked);
+                    var isChecked = ch3.checked;
+                    resultat.classList.toggle('stilig3', isChecked);     
+                resultat.classList.add("selected")
+                resultat2.classList.remove("selected")
+                }
+                if(value === "alt3"){
+                    var isChecked = ch1.checked;
+                    resultat2.classList.toggle('stilig1', isChecked);
+                    var isChecked = ch2.checked;
+                    resultat2.classList.toggle('stilig2', isChecked);
+                    var isChecked = ch3.checked;
+                    resultat2.classList.toggle('stilig3', isChecked);
+                resultat.classList.remove("selected")
+                resultat2.classList.add("selected")
+                }                  
+            }
+
+        </script>
+
+
+    </body>
+
+</html>
